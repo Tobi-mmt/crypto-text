@@ -64,7 +64,7 @@ const IndexPage = (): ReactElement => {
   return (
     <Layout title="Crypto string">
       <Typography variant="h1" gutterBottom>
-        Crypto string - encrypt
+        Encrypt
       </Typography>
 
       <FormControl variant="outlined">

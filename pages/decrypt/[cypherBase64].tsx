@@ -1,8 +1,39 @@
 import React, { ReactElement, useState, useEffect } from "react";
-import Layout from "../../components/Layout";
 import { decrypt } from "../../lib/crypto";
 import { getKeyFromRouter } from "../../lib/key";
 import { useRouter } from "next/router";
+
+import Layout from "../../components/Layout";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+  textField: {
+    marginBottom: theme.spacing(3),
+  },
+  cardsWrapper: {
+    display: "flex",
+  },
+  cards: {
+    width: "100%",
+  },
+  firstCard: {
+    marginRight: theme.spacing(3),
+  },
+}));
 
 const IndexPage = (): ReactElement => {
   const router = useRouter();
@@ -10,6 +41,8 @@ const IndexPage = (): ReactElement => {
   const [plainText, setPlainText] = useState<string>("");
   const [key, setKey] = useState<string>(""); //23456ytrew56
   const [error, setError] = useState<string>("");
+  const classes = useStyles();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
     const key = getKeyFromRouter(router);
@@ -33,23 +66,46 @@ const IndexPage = (): ReactElement => {
 
   return (
     <Layout title="Crypto string">
-      <h1>Crypto string - decrypt</h1>
+      <Typography variant="h1" gutterBottom>
+        Decrypt
+      </Typography>
 
-      <h2>Password</h2>
-      <input
-        type="text"
-        placeholder="Enter your password"
-        value={key}
-        onChange={(e) => setKey(e.target.value)}
-      />
+      <FormControl variant="outlined">
+        <InputLabel htmlFor="password">Password</InputLabel>
+        <OutlinedInput
+          id="password"
+          fullWidth
+          className={classes.textField}
+          value={key}
+          onChange={(e) => setKey(e.target.value)}
+          type={showPassword ? "text" : "password"}
+          labelWidth={70}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+
       {error ? (
-        <p>{error}</p>
+        <Typography>{error}</Typography>
       ) : (
-        <>
-          <hr />
-          <h2>Your secret Message</h2>
-          <p>{plainText}</p>
-        </>
+        <TextField
+          multiline
+          fullWidth
+          className={classes.textField}
+          label="Your secret Message"
+          variant="outlined"
+          placeholder="Dear Alice ..."
+          rows={4}
+          value={plainText}
+        />
       )}
     </Layout>
   );
