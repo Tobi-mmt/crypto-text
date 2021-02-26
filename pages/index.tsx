@@ -6,7 +6,7 @@ const IndexPage = (): ReactElement => {
   const [plainText, setPlainText] = useState<string>("");
   const [cypher, setCypher] = useState<string>("");
   const [key, setKey] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>("You need to enter a password AND your message");
 
   useEffect(() => {
     // encrypt on change
