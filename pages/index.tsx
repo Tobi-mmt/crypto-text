@@ -46,9 +46,9 @@ const IndexPage = (): ReactElement => {
         <p>{error}</p>
       ) : (
         <>
-          <h2>Public secrue link</h2>
+          <h2>Public link</h2>
           <p>
-            It is save to post send this link via unsecured ways since all datas
+            It is save to send this link via unsecured ways since all data
             are securely encrypted.
           </p>
           <p>
@@ -60,7 +60,7 @@ const IndexPage = (): ReactElement => {
           </p>
           <h2>Private link</h2>
           <p>
-            This link contains the password. Do no post this in public places
+            This link contains the password. Do no post this in public places.
           </p>
           <p>
             <a
