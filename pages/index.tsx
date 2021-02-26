@@ -53,10 +53,10 @@ const IndexPage = (): ReactElement => {
           </p>
           <p>
             <a
-              href={`localhost:3000/decrypt/${cypher}`}
+              href={`/decrypt/${cypher}`}
               target="_blank"
               rel="noreferrer"
-            >{`localhost:3000/decrypt/${cypher}`}</a>
+            >{`https://crypto-text.vercel.app/decrypt/${cypher}`}</a>
           </p>
           <h2>Private link</h2>
           <p>
@@ -64,10 +64,10 @@ const IndexPage = (): ReactElement => {
           </p>
           <p>
             <a
-              href={`localhost:3000/decrypt/${cypher}#${stringToBase64(key)}`}
+              href={`/decrypt/${cypher}#${stringToBase64(key)}`}
               target="_blank"
               rel="noreferrer"
-            >{`localhost:3000/decrypt/${cypher}#${stringToBase64(key)}`}</a>
+            >{`https://crypto-text.vercel.app/decrypt/${cypher}#${stringToBase64(key)}`}</a>
           </p>
         </>
       )}
