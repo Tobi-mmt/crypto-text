@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import GitHubIcon from "@material-ui/icons/GitHub";
 
 export type LayoutProps = {
   children?: ReactNode;
@@ -16,6 +17,15 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
     borderTop: "1px solid gray",
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  flex: {
+    display: "flex",
+  },
+  link: {
+    color: "black",
+    marginLeft: "1em",
   },
 }));
 
@@ -36,7 +46,20 @@ const Layout = ({
       <>{children}</>
 
       <footer className={classes.footer}>
-        <Typography color="textSecondary">© Tobias </Typography>
+        <Typography color="textSecondary">© Tobias</Typography>
+        <div className={classes.flex}>
+          <Typography color="textSecondary">
+            This is an open source project{" "}
+          </Typography>
+          <a
+            className={classes.link}
+            href="https://github.com/Tobi-mmt/crypto-text"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GitHubIcon />
+          </a>
+        </div>
       </footer>
     </Container>
   );
