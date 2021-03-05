@@ -1,10 +1,9 @@
 import { compressToUTF16, decompressFromUTF16 } from "lz-string";
 import { AES, enc } from "crypto-js";
 
-export const decrypt = (data: string, key: string): string => {
+export const decrypt = (cypher: string, key: string): string => {
   if (key) {
-    const wordArray = enc.Base64.parse(data);
-    const encryptedData = wordArray.toString(enc.Utf8);
+    const encryptedData = base64ToString(cypher);
     const bytes = AES.decrypt(encryptedData, key);
     const compressedData = bytes.toString(enc.Utf8);
     const plainText = decompressFromUTF16(compressedData);
@@ -13,12 +12,10 @@ export const decrypt = (data: string, key: string): string => {
   return "";
 };
 
-export const encrypt = (data: string, key: string): string => {
-  const compressedData = compressToUTF16(data);
+export const encrypt = (string: string, key: string): string => {
+  const compressedData = compressToUTF16(string);
   const encryptedData = AES.encrypt(compressedData, key).toString();
-  const wordArray = enc.Utf8.parse(encryptedData);
-  const urlSafeBase64String = enc.Base64.stringify(wordArray);
-  return urlSafeBase64String;
+  return stringToBase64(encryptedData);
 };
 
 export const stringToBase64 = (plainString: string): string => {
